@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, onValue, remove } from "firebase/database";
 
 const firebaseConfig = {
-    databaseURL: ProcessingInstruction.env.FIREBASE_URL
+    databaseURL: process.env.FIREBASE_URL
 }
 
 const app = initializeApp(firebaseConfig);
@@ -30,6 +30,7 @@ function render(leads) {
 onValue(leadsDBRef, function (snapshot) {
     const snapshotExists = snapshot.exists();
     if (snapshotExists) {
+        console.log('exists')
         const snapshotVals = snapshot.val();
         const leads = Object.values(snapshotVals);
         render(leads);
